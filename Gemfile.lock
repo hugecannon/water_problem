@@ -3,6 +3,7 @@ GEM
   specs:
     execjs (1.4.0)
       multi_json (~> 1.0)
+    json (1.7.7)
     multi_json (1.7.3)
 
 PLATFORMS
@@ -10,3 +11,4 @@ PLATFORMS
 
 DEPENDENCIES
   execjs
+  json (~> 1.7.7)
