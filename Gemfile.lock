@@ -5,6 +5,7 @@ GEM
       multi_json (~> 1.0)
     json (1.7.7)
     multi_json (1.7.3)
+    rainbow (1.1.4)
 
 PLATFORMS
   ruby
@@ -12,3 +13,4 @@ PLATFORMS
 DEPENDENCIES
   execjs
   json (~> 1.7.7)
+  rainbow

@@ -3,12 +3,17 @@
 require 'rubygems'
 require 'bundler/setup'
 require "execjs"
+require "rainbow"
 
 source = open("./water3js/water3.js").read
-context = ExecJS.compile source
+$context = ExecJS.compile source
 
-data = context.exec "return data"
-result = context.exec "return getWater(data)"
+#data = context.exec "return data"
+#result = context.exec "return getWater(data)"
+
+def get_result(data)
+  $context.exec "return getWater(#{data})"
+end
 
 def get_water(data)
   height = data.max
@@ -55,4 +60,21 @@ def right_clear?(grid, x, y)
   x >= grid.length-1 || grid[x+1][y] == :air
 end
 
-puts get_water(data)
+puts "Height\tWidth\tHugh\tJames"
+for test in 1..100
+  height = rand(2..10)
+  data = Array.new(rand(10..100)) { rand(1..height) }
+  print "#{height}\t#{data.length}\t"
+  $stdout.flush
+  hugh = get_result(data)
+  print "#{hugh}\t"
+  $stdout.flush
+  james = get_water(data)
+  print "#{james}\t"
+  $stdout.flush
+  if(hugh == james)
+    puts "PASS".foreground(:green)
+  else
+    puts "FAIL".foreground(:red)
+  end
+end
