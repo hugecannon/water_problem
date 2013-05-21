@@ -20,7 +20,7 @@ def get_water(data)
     end
   end
   remove_pass grid
-  grid
+  grid.collect { |column| column.count(:water) }.each.reduce(:+)
 end
 
 def remove_pass(grid)
@@ -55,4 +55,4 @@ def right_clear?(grid, x, y)
   x >= grid.length-1 || grid[x+1][y] == :air
 end
 
-get_water(data)
+puts get_water(data)
