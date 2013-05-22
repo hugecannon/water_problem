@@ -5,7 +5,7 @@ require 'bundler/setup'
 require "execjs"
 require "rainbow"
 
-source = open("./water3js/water4.js").read
+source = open("./hughwater/water4.js").read
 source_s = open("./saralwater/water2.js").read
 $context = ExecJS.compile source
 $context_s = ExecJS.compile source_s
