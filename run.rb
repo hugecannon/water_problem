@@ -5,11 +5,17 @@ require 'bundler/setup'
 require "execjs"
 require "rainbow"
 
-source = open("./water3js/water3.js").read
+source = open("./water3js/water4.js").read
+source_s = open("./saralwater/water2.js").read
 $context = ExecJS.compile source
+$context_s = ExecJS.compile source_s
 
 #data = context.exec "return data"
 #result = context.exec "return getWater(data)"
+
+def get_result_s(data) 
+  $context_s.exec "return area(#{data})"
+end
 
 def get_result(data)
   $context.exec "return getWater(#{data})"
@@ -64,6 +70,7 @@ puts "Height\tWidth\tHugh\tJames"
 for test in 1..100
   height = rand(2..10)
   data = Array.new(rand(10..100)) { rand(1..height) }
+#  print "#{data}\n"
   print "#{height}\t#{data.length}\t"
   $stdout.flush
   hugh = get_result(data)
@@ -72,7 +79,10 @@ for test in 1..100
   james = get_water(data)
   print "#{james}\t"
   $stdout.flush
-  if(hugh == james)
+  saral = get_result_s(data)
+  print "#{saral}\t"
+  $stdout.flush
+  if(saral == james && saral == hugh && james == hugh)
     puts "PASS".foreground(:green)
   else
     puts "FAIL".foreground(:red)
